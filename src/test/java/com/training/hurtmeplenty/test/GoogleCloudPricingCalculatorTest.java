@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -25,6 +26,10 @@ public class GoogleCloudPricingCalculatorTest {
     public void browserSetup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    @BeforeClass(alwaysRun = true)
+    public void fillAllOfRequiredFields() {
         String searchRequest = "Google Cloud Platform Pricing Calculator";
         String typeOfGPU = "NVIDIA Tesla V100";
         calculatorPage = new GoogleCloudHomePage(driver)
