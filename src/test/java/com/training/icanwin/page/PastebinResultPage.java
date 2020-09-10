@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PastebinResultPage {
     private final WebDriver driver;
-    private static final String XPATH_OF_ELEMENT = "//div[@class='notice -success -post-view']//b[contains(text(),'NOTE')]";
+    private static final String SUCCESSFUL_NOTE_XPATH = "//div[@class='notice -success -post-view']//b[contains(text(),'NOTE')]";
 
     public PastebinResultPage(WebDriver driver) {
         this.driver = driver;
@@ -19,6 +19,6 @@ public class PastebinResultPage {
 
     public WebElement getSuccessfulCreationNote() {
         return new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_OF_ELEMENT)));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(SUCCESSFUL_NOTE_XPATH)));
     }
 }

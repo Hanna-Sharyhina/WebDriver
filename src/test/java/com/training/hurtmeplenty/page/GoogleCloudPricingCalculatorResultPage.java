@@ -1,6 +1,8 @@
 package com.training.hurtmeplenty.page;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +18,7 @@ public class GoogleCloudPricingCalculatorResultPage {
     }
 
     @FindBy(xpath = "//b[contains(text(),'Total Estimated Cost')]")
-    WebElement totalEstimatedCost;
+    private WebElement totalEstimatedCost;
 
     public String getComputedMachineClassText() {
         return getEstimatedValue("VM class", " ", 2);
