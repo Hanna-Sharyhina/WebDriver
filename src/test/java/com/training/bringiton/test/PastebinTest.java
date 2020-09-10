@@ -5,7 +5,10 @@ import com.training.bringiton.page.ResultPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class PastebinTest {
     private WebDriver driver;
@@ -20,6 +23,10 @@ public class PastebinTest {
     public void browserSetup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    @BeforeClass(alwaysRun = true)
+    public void fillAllOfRequiredFields() {
         resultPage = new HomePage(driver)
                 .openPage()
                 .addPasteCode(PASTE_CODE)
