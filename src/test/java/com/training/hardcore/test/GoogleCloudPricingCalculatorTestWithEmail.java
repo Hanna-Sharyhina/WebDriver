@@ -42,6 +42,7 @@ public class GoogleCloudPricingCalculatorTestWithEmail {
                 .openPage()
                 .copyEmailFromBox()
                 .switchToCalculatorResultPage()
+                .switchToInnerFrame()
                 .addEmailToEmailField()
                 .sendEmail()
                 .openReceivedEmail()

@@ -19,7 +19,7 @@ public class PricingCalculatorPage {
     @FindBy(xpath = "//iframe[@src = '/products/calculator/index_ad8ca20a6d1799e286a0c0839aeb86ca523afe927b04501d8ba77dc59e5b8523.frame']")
     private WebElement firstInnerFrame;
 
-    @FindBy(xpath = "//iframe[@src = 'https://cloudpricingcalculator.appspot.com']")
+    @FindBy(id = "myFrame")
     private WebElement secondInnerFrame;
 
     @FindBy(xpath = "//div[@title = 'Compute Engine' and @class = 'tab-holder compute']")

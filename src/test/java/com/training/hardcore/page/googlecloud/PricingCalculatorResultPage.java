@@ -1,7 +1,7 @@
 package com.training.hardcore.page.googlecloud;
 
 import com.training.hardcore.page.tenminuteemail.TenMinuteEmailHomePage;
-import com.training.hardcore.page.tenminuteemail.TenMinutesPageWithReceivedEmail;
+import com.training.hardcore.page.tenminuteemail.TenMinutePageWithReceivedEmail;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,7 +22,7 @@ public class PricingCalculatorResultPage {
     @FindBy(xpath = "//iframe[@src = '/products/calculator/index_ad8ca20a6d1799e286a0c0839aeb86ca523afe927b04501d8ba77dc59e5b8523.frame']")
     private WebElement firstInnerFrame;
 
-    @FindBy(xpath = "//iframe[@src = 'https://cloudpricingcalculator.appspot.com']")
+    @FindBy(id = "myFrame")
     private WebElement secondInnerFrame;
 
     @FindBy(xpath = "//button[@id ='email_quote']")
@@ -50,20 +50,24 @@ public class PricingCalculatorResultPage {
         return new TenMinuteEmailHomePage(driver, this);
     }
 
-    public PricingCalculatorResultPage addEmailToEmailField() {
+    public PricingCalculatorResultPage switchToInnerFrame() {
         driver.switchTo().frame(firstInnerFrame);
         driver.switchTo().frame(secondInnerFrame);
+        return this;
+    }
+
+    public PricingCalculatorResultPage addEmailToEmailField() {
         WebElement element = new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type = 'email']")));
         element.sendKeys(Keys.CONTROL + "v");
         return this;
     }
 
-    public TenMinutesPageWithReceivedEmail sendEmail() {
-        new WebDriverWait(driver, 10)
+    public TenMinutePageWithReceivedEmail sendEmail() {
+        new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(sendEmailButton)).click();
         switchBetweenTabs(1);
-        return new TenMinutesPageWithReceivedEmail(driver);
+        return new TenMinutePageWithReceivedEmail(driver);
     }
 
     public void switchBetweenTabs(int index) {
