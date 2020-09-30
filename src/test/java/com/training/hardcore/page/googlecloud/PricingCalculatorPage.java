@@ -1,20 +1,17 @@
 package com.training.hardcore.page.googlecloud;
 
+import com.training.hardcore.model.ComputeEngine;
+import com.training.hardcore.page.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PricingCalculatorPage {
-    private final WebDriver driver;
+public class PricingCalculatorPage extends AbstractPage {
 
-    public PricingCalculatorPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+    private final By addGpusCheckBoxLocator = By.xpath("//form[@name = 'ComputeEngineForm']//md-checkbox[@aria-label = 'Add GPUs']");
 
     @FindBy(xpath = "//iframe[@src = '/products/calculator/index_ad8ca20a6d1799e286a0c0839aeb86ca523afe927b04501d8ba77dc59e5b8523.frame']")
     private WebElement firstInnerFrame;
@@ -49,6 +46,10 @@ public class PricingCalculatorPage {
     @FindBy(xpath = "//form[@name = 'ComputeEngineForm']//button[@aria-label = 'Add to Estimate']")
     private WebElement addToEstimateButton;
 
+    public PricingCalculatorPage(WebDriver driver) {
+        super(driver);
+    }
+
     public PricingCalculatorPage switchToInnerFrame() {
         driver.switchTo().frame(firstInnerFrame);
         driver.switchTo().frame(secondInnerFrame);
@@ -58,6 +59,18 @@ public class PricingCalculatorPage {
     public PricingCalculatorPage activateComputeEngineSection() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(computeEngineSectionButton)).click();
+        return this;
+    }
+
+    public PricingCalculatorPage fillAllOfRequiredFields(ComputeEngine computeEngine) {
+        addNumberOfInstances(computeEngine.getNumberOfInstance());
+        chooseInstanceType(computeEngine.getInstanceType());
+        addGPUs();
+        chooseNumberOfGPUs(computeEngine.getNumberOfGPUs());
+        chooseTypeOfGPU(computeEngine.getTypeOfGPU());
+        chooseLocalSSD(computeEngine.getLocalSSD());
+        chooseDataCenterLocation(computeEngine.getDataCenterLocation());
+        chooseCommittedUsage(computeEngine.getCommitmentUsage());
         return this;
     }
 
@@ -73,8 +86,7 @@ public class PricingCalculatorPage {
 
     public PricingCalculatorPage addGPUs() {
         new WebDriverWait(driver, 15)
-                .until(ExpectedConditions.elementToBeClickable(By
-                        .xpath("//form[@name = 'ComputeEngineForm']//md-checkbox[@aria-label = 'Add GPUs']"))).click();
+                .until(ExpectedConditions.elementToBeClickable(addGpusCheckBoxLocator)).click();
         return this;
     }
 

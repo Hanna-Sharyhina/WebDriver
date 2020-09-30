@@ -1,41 +1,27 @@
 package com.training.hardcore.test;
 
+import com.training.hardcore.model.ComputeEngine;
 import com.training.hardcore.page.googlecloud.GoogleCloudHomePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import com.training.hardcore.service.ComputeEngineCreator;
 import org.testng.annotations.Test;
 
-public class GoogleCloudPricingCalculatorTestWithEmail {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
-    private WebDriver driver;
-
-    @BeforeTest(alwaysRun = true)
-    public void browserSetup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-    }
+public class GoogleCloudPricingCalculatorTestWithEmail extends CommonConditions {
 
     @Test
     public void isReceivedByEmailTotalCostEqualsToExpectedOne() {
+        ComputeEngine testComputeEngine = ComputeEngineCreator.withParametersFromProperty();
         String searchRequest = "Google Cloud Platform Pricing Calculator";
-        String expectedTotalCost = "1,082.77";
         String totalCostFromEmail = new GoogleCloudHomePage(driver)
                 .openPage()
                 .searchForTerms(searchRequest)
                 .getToRequiredSearchResult(searchRequest)
                 .switchToInnerFrame()
                 .activateComputeEngineSection()
-                .addNumberOfInstances("4")
-                .chooseInstanceType("n1-standard-8 (vCPUs: 8, RAM: 30GB)")
-                .addGPUs()
-                .chooseNumberOfGPUs("1")
-                .chooseTypeOfGPU("NVIDIA Tesla V100")
-                .chooseLocalSSD("2x375 GB")
-                .chooseDataCenterLocation("Frankfurt (europe-west3)")
-                .chooseCommittedUsage("1 Year")
+                .fillAllOfRequiredFields(testComputeEngine)
                 .addToEstimate()
                 .openEmailYourEstimateWindow()
                 .openPageWithTemporaryEmail()
@@ -47,12 +33,6 @@ public class GoogleCloudPricingCalculatorTestWithEmail {
                 .sendEmail()
                 .openReceivedEmail()
                 .getTotalCostFromEmail();
-        Assert.assertEquals(totalCostFromEmail, expectedTotalCost);
-    }
-
-    @AfterClass(alwaysRun = true)
-    public void browserTearDown() {
-        driver.quit();
-        driver = null;
+        assertThat(totalCostFromEmail, is(equalTo(testComputeEngine.getExpectedTotalCost())));
     }
 }

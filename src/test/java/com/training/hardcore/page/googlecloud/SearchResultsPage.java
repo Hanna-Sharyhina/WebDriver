@@ -1,18 +1,15 @@
 package com.training.hardcore.page.googlecloud;
 
+import com.training.hardcore.page.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SearchResultsPage {
-
-    private final WebDriver driver;
+public class SearchResultsPage extends AbstractPage {
 
     public SearchResultsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public PricingCalculatorPage getToRequiredSearchResult(String requiredItem) {
