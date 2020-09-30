@@ -2,6 +2,7 @@ package com.training.hardcore.page.tenminuteemail;
 
 import com.training.hardcore.page.AbstractPage;
 import com.training.hardcore.page.googlecloud.PricingCalculatorResultPage;
+import com.training.hardcore.util.TabSwitcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class TenMinuteEmailHomePage extends AbstractPage {
@@ -41,8 +41,7 @@ public class TenMinuteEmailHomePage extends AbstractPage {
     }
 
     public PricingCalculatorResultPage switchToCalculatorResultPage() {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+        TabSwitcher.switchBetweenTabs(driver, 0);
         return calculatorResultPage;
     }
 }

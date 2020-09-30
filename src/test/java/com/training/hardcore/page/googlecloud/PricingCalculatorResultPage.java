@@ -3,12 +3,11 @@ package com.training.hardcore.page.googlecloud;
 import com.training.hardcore.page.AbstractPage;
 import com.training.hardcore.page.tenminuteemail.TenMinuteEmailHomePage;
 import com.training.hardcore.page.tenminuteemail.TenMinutePageWithReceivedEmail;
+import com.training.hardcore.util.TabSwitcher;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
 
 public class PricingCalculatorResultPage extends AbstractPage {
 
@@ -29,8 +28,15 @@ public class PricingCalculatorResultPage extends AbstractPage {
     @FindBy(xpath = "//button[@aria-label = 'Send Email']")
     private WebElement sendEmailButton;
 
+    @FindBy(xpath = "//b[contains(text(),'Total Estimated Cost')]")
+    private WebElement totalEstimatedCost;
+
     public PricingCalculatorResultPage(WebDriver driver) {
         super(driver);
+    }
+
+    public String getTotalEstimatedCost() {
+        return totalEstimatedCost.getText().split(" ")[4];
     }
 
     public PricingCalculatorResultPage openEmailYourEstimateWindow() {
@@ -44,7 +50,7 @@ public class PricingCalculatorResultPage extends AbstractPage {
 
     public TenMinuteEmailHomePage openPageWithTemporaryEmail() {
         ((JavascriptExecutor) driver).executeScript("window.open()");
-        switchBetweenTabs(1);
+        TabSwitcher.switchBetweenTabs(driver, 1);
         return new TenMinuteEmailHomePage(driver, this);
     }
 
@@ -64,12 +70,7 @@ public class PricingCalculatorResultPage extends AbstractPage {
     public TenMinutePageWithReceivedEmail sendEmail() {
         new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(sendEmailButton)).click();
-        switchBetweenTabs(1);
+        TabSwitcher.switchBetweenTabs(driver, 1);
         return new TenMinutePageWithReceivedEmail(driver);
-    }
-
-    public void switchBetweenTabs(int index) {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(index));
     }
 }

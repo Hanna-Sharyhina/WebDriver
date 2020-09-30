@@ -14,7 +14,7 @@ public class GoogleCloudHomePage extends AbstractPage {
     private static final String HOME_PAGE_URL = "https://cloud.google.com/";
     private final By searchButtonLocator = By.xpath("//div[@class = 'devsite-search-container']");
 
-    @FindBy(xpath = "//input[@aria-label = 'Search box']")
+    @FindBy(xpath = "//input[@aria-label = 'Search']")
     private WebElement searchInput;
 
     public GoogleCloudHomePage(WebDriver driver) {
