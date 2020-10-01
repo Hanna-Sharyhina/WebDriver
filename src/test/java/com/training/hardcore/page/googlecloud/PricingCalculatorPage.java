@@ -51,6 +51,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage switchToInnerFrame() {
+        logger.info("Page with pricing calculator was opened.");
         driver.switchTo().frame(firstInnerFrame);
         driver.switchTo().frame(secondInnerFrame);
         return this;
@@ -71,6 +72,7 @@ public class PricingCalculatorPage extends AbstractPage {
         chooseLocalSSD(computeEngine.getLocalSSD());
         chooseDataCenterLocation(computeEngine.getDataCenterLocation());
         chooseCommittedUsage(computeEngine.getCommitmentUsage());
+        logger.info("All required fields were filled in.");
         return this;
     }
 

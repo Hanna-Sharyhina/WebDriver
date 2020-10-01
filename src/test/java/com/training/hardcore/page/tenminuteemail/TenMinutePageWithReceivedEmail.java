@@ -29,6 +29,7 @@ public class TenMinutePageWithReceivedEmail extends AbstractPage {
         WebElement receivedMessageString = wait
                 .until(driver -> driver.findElement(receivedMessageLineLocator));
         receivedMessageString.click();
+        logger.info("Email with estimated cost was received. ");
         return this;
     }
 

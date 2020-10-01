@@ -71,6 +71,7 @@ public class PricingCalculatorResultPage extends AbstractPage {
         new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(sendEmailButton)).click();
         TabSwitcher.switchBetweenTabs(driver, 1);
+        logger.info("Email with the estimated cost was sent to the temporary email box");
         return new TenMinutePageWithReceivedEmail(driver);
     }
 }

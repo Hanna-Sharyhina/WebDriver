@@ -29,6 +29,7 @@ public class TenMinuteEmailHomePage extends AbstractPage {
 
     public TenMinuteEmailHomePage openPage() {
         driver.get(HOME_PAGE_URL);
+        logger.info("Page with a temporary email box was opened. ");
         return this;
     }
 
@@ -37,6 +38,7 @@ public class TenMinuteEmailHomePage extends AbstractPage {
                 Objects.requireNonNull(driver).findElement(emailInputLocator).getAttribute("value").length() != 0);
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(copyEmailButton)).click();
+        logger.info("Temporary email address was copied to the clipboard.");
         return this;
     }
 
