@@ -23,7 +23,7 @@ public class TenMinutePageWithReceivedEmail extends AbstractPage {
 
     public TenMinutePageWithReceivedEmail openReceivedEmail() {
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(90))
+                .withTimeout(Duration.ofSeconds(120))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(NoSuchElementException.class);
         WebElement receivedMessageString = wait
