@@ -24,10 +24,11 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
-
+        logger.info("Test " + iTestResult.getName() + " successful finished.");
     }
 
     public void onTestFailure(ITestResult iTestResult) {
+        logger.info("Test " + iTestResult.getName() + " failed.");
         saveScreenshot();
     }
 
@@ -56,6 +57,7 @@ public class TestListener implements ITestListener {
                     ".//target/screenshots/"
                             + getCurrentTimeAsString() +
                             ".png"));
+            logger.info("Screenshot with test failure moment was saved. ");
         } catch (IOException e) {
             logger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
