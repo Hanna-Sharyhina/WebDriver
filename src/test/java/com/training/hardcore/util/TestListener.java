@@ -24,7 +24,7 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
-        logger.info("Test " + iTestResult.getName() + " successful finished.");
+        logger.info("Test " + iTestResult.getName() + " finished successfully.");
     }
 
     public void onTestFailure(ITestResult iTestResult) {

@@ -37,10 +37,10 @@ public class PricingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//md-select[@placeholder = 'Local SSD']")
     private WebElement localSSDMenu;
 
-    @FindBy(xpath = "//md-select[@id = 'select_88']")
+    @FindBy(xpath = "//md-select[@id = 'select_89']")
     private WebElement dataCenterLocationMenu;
 
-    @FindBy(xpath = "//md-select[@id = 'select_95']")
+    @FindBy(xpath = "//md-select[@id = 'select_96']")
     private WebElement committedUsageMenu;
 
     @FindBy(xpath = "//form[@name = 'ComputeEngineForm']//button[@aria-label = 'Add to Estimate']")
@@ -93,7 +93,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage chooseNumberOfGPUs(String numberOfGPUsOption) {
-        selectElementFromDropDownMenu(numberOfGPUsMenu, "//div[@id = 'select_container_373']//md-option[@value = '"
+        selectElementFromDropDownMenu(numberOfGPUsMenu, "//div[@id = 'select_container_374']//md-option[@value = '"
                 + numberOfGPUsOption + "']");
         return this;
     }
@@ -106,7 +106,7 @@ public class PricingCalculatorPage extends AbstractPage {
 
     public PricingCalculatorPage chooseLocalSSD(String localSSD) {
         selectElementFromDropDownMenu(localSSDMenu,
-                "//div[@id = 'select_container_194']//div[contains(text(), '" + localSSD + "')]");
+                "//div[@id = 'select_container_195']//div[contains(text(), '" + localSSD + "')]");
         return this;
     }
 
@@ -118,7 +118,7 @@ public class PricingCalculatorPage extends AbstractPage {
 
     public PricingCalculatorPage chooseCommittedUsage(String usage) {
         selectElementFromDropDownMenu(committedUsageMenu,
-                "//div[@id = 'select_container_96']//div[contains(text(), '" +
+                "//div[@id = 'select_container_97']//div[contains(text(), '" +
                         usage + "')]/ancestor::md-option");
         return this;
     }
