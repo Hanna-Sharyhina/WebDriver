@@ -4,6 +4,7 @@ import com.training.hardcore.page.AbstractPage;
 import com.training.hardcore.page.googlecloud.PricingCalculatorResultPage;
 import com.training.hardcore.util.TabSwitcher;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,7 @@ public class TenMinuteEmailHomePage extends AbstractPage {
 
     public TenMinuteEmailHomePage openPage() {
         driver.get(HOME_PAGE_URL);
+        driver.manage().window().setSize(new Dimension(1600, 900));
         logger.info("Page with a temporary email box was opened. ");
         return this;
     }
