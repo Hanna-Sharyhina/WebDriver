@@ -4,7 +4,10 @@ import com.training.hardcore.page.AbstractPage;
 import com.training.hardcore.page.tenminuteemail.TenMinuteEmailHomePage;
 import com.training.hardcore.page.tenminuteemail.TenMinutePageWithReceivedEmail;
 import com.training.hardcore.util.TabSwitcher;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PricingCalculatorResultPage extends AbstractPage {
 
     private final By emailFieldLocator = By.xpath("//input[@type = 'email']");
+    private String temporaryEmail;
 
     @FindBy(xpath = "//iframe[@src = '/products/calculator/index_ad8ca20a6d1799e286a0c0839aeb86ca523afe927b04501d8ba77dc59e5b8523.frame']")
     private WebElement firstInnerFrame;
@@ -60,10 +64,14 @@ public class PricingCalculatorResultPage extends AbstractPage {
         return this;
     }
 
+    public void setTemporaryEmail(String temporaryEmail) {
+        this.temporaryEmail = temporaryEmail;
+    }
+
     public PricingCalculatorResultPage addEmailToEmailField() {
         WebElement element = new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.presenceOfElementLocated(emailFieldLocator));
-        element.sendKeys(Keys.CONTROL + "v");
+        element.sendKeys(temporaryEmail);
         return this;
     }
 
