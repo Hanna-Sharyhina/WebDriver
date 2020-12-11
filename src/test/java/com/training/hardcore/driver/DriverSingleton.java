@@ -13,7 +13,7 @@ public class DriverSingleton {
         if (null == driver) {
             switch (System.getProperty("browser")) {
                 case "firefox": {
-                    WebDriverManager.firefoxdriver().version("83.0").setup();
+                    WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                     break;
                 }
