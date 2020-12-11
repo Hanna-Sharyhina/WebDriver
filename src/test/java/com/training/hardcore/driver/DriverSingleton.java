@@ -19,7 +19,10 @@ public class DriverSingleton {
                 }
                 default: {
                     WebDriverManager.chromedriver().version("87.0.4280.88").setup();
-                    driver = new ChromeDriver();
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless");
+                    options.addArguments("--no-sandbox");
+                    driver = new ChromeDriver(options);
                 }
             }
             driver.manage().window().maximize();
